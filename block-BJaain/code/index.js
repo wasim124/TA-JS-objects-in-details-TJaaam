@@ -1,15 +1,15 @@
-console.log(this.document === document); // Output
+console.log(this.document === document); // Output true , since in browser environment 'this' keyword inside global scope points to window object that contains the document property, and therefore window.document and document refer to the same object.
 
 // ------------
 
-console.log(this === window); //Output
+console.log(this === window); //Output true, as this keyword inside global scope points to window object in browser environment.
 
 // ------------
 
 var myFunction = function () {
   console.log(this);
 };
-myFunction(); // Output
+myFunction(); // Output Here, since myFunction is called without any object, 'this' keyword inside it will point to the global object(window object in browser), and therefore it will output window object.
 
 // ------------
 
@@ -17,7 +17,7 @@ function f1() {
   'use strict';
   return this;
 }
-console.log(f1() === window); //Output
+console.log(f1() === window); //Output false,, in strict mode 'this' keyword inside a function doesn't point to the global object. In this case, since f1 is called without any object, 'this' inside it will point to undefined.
 
 // ------------
 
@@ -26,7 +26,7 @@ function foo() {
   console.log(this === window);
 }
 
-foo(); //Output ??
+foo(); //Output ??  Here, foo is called without any object, so 'this' keyword inside it points to window object. Therefore, it will output true.
 
 // ------------
 
@@ -34,7 +34,7 @@ foo(); //Output ??
 (function () {
   console.log('Anonymous function invocation');
   console.log(this === window);
-})(); //Output
+})(); //Output Here, since the anonymous function is called without any object, 'this' inside it will point to window object. Therefore, it will output true.
 
 // ------------
 
@@ -42,7 +42,7 @@ var myObject = {};
 myObject.someMethod = function () {
   console.log(this);
 };
-myObject.someMethod(); //Value Of This
+myObject.someMethod(); //Value Of This, Here, myObject is the object calling the someMethod() function, so 'this' keyword inside the function points to myObject. Therefore, it will output myObject.
 
 // ------------
 
@@ -56,9 +56,9 @@ function Person(fn, ln) {
 }
 
 let person = new Person('John', 'Reed');
-person.displayName(); // Output
+person.displayName(); // Output jhon reed
 let person2 = new Person('Paul', 'Adams');
-person2.displayName(); // Output
+person2.displayName(); // Output paul adams
 
 // ------------
 
@@ -76,10 +76,13 @@ let user = {
   },
 };
 
-user.foo(); // Output
+user.foo(); // Output: Here, the 'this' keyword inside foo function will point to the user object, since the function is called as a method of user object. Therefore, it will output false.
 let fun1 = user.foo1;
-fun1(); // Output ??
-user.foo1(); // Output ??
+fun1(); // Output: Here, fun1 is a reference to the foo1 function, which is called without any object, and therefore 'this' inside it will point to window object. Therefore, it will output true.
+
+user.foo1(); // Output: Here, 'this' keyword inside foo1 function will point to the user object since it's called as a method of user object. Therefore, it will output false.
+
+
 
 // ------------
 
@@ -91,13 +94,13 @@ var obj = {
   },
 };
 
-obj.getX(); // Output ??
+obj.getX(); // Output 81
 
 var retrieveX = obj.getX;
-retrieveX(); //Output ??
+retrieveX(); //Output 9
 
 var boundGetX = retrieveX.bind(obj);
-boundGetX(); // Output ??
+boundGetX(); // Output 81
 
 // ------------
 
@@ -111,11 +114,12 @@ function Person(fn, ln) {
 }
 
 let person = new Person('John', 'Reed');
-person.displayName(); // Output
+person.displayName(); // Output John Reed
 let person2 = new Person('Paul', 'Adams');
-person2.displayName(); // Output
+person2.displayName(); // Output Paul Adams
 
-person.displayName.call(person2); // Output ??
+
+person.displayName.call(person2); // Output Paul Adams
 
 // ------------
 
@@ -131,22 +135,24 @@ const obj = {
 obj.getThis3 = obj.getThis.bind(obj);
 obj.getThis4 = obj.getThis2.bind(obj);
 
-// Output
+// Output global window
 obj.getThis();
 
-// Output
+// Output This will also return the global object, for the same reason as above. The argument passed to call() is ignored in arrow functions.
 obj.getThis.call(a);
 
-// Output
+// Output This will return the obj object because getThis2 is a regular function and has its own this binding, which is set to the object it was called on (obj).
 obj.getThis2();
 
-// Output
+// Output This will return the a object because call() sets the this binding explicitly to the argument passed (a in this case).
 obj.getThis2.call(a);
 
-// Output
+// Output global window
 obj.getThis3();
 
-// Output
+// Output The output of obj.getThis4() will be the obj itself.
+
+
 obj.getThis4();
 
 // -------------
@@ -158,10 +164,11 @@ let person = {
   },
 };
 
-person.greet(); // output
+person.greet(); // output hello, Jay
+
 
 let greet = person.greet;
-greet(); // output
+greet(); // output hello
 
 // -------------
 
@@ -178,14 +185,14 @@ let person = {
     return this.name;
   },
 };
-console.log(person.details.print()); // output?
-console.log(person.print()); // output?
+console.log(person.details.print()); // output? Jay Details
+console.log(person.print()); // output? Jay Person
 
 let name1 = person.print;
 let name2 = person.details;
 
-console.log(name1()); // output?
-console.log(name2.print()); // output?
+console.log(name1()); // output? Jay Global
+console.log(name2.print()); // output? Jay Details
 
 // --------
 
@@ -199,7 +206,7 @@ let outerFn = function () {
   return innerFn;
 };
 
-outerFn()();
+outerFn()(); //error
 
 // -----------
 
@@ -238,7 +245,7 @@ function print() {
 }
 
 let printNameBob = print.bind(bobObj);
-console.log(printNameBob()); // output??
+console.log(printNameBob()); // output?? Bob
 
 // -------------------
 
@@ -257,7 +264,7 @@ let obj2 = {
 };
 
 let getSecondData = obj2.printSecondData.bind(obj1);
-console.log(getSecondData()); // Output and why ???
+console.log(getSecondData()); // Output and why ??? The output of getSecondData() will be undefined.In the code, getSecondData is created by calling the bind method on obj2.printSecondData and passing obj1 as the argument. This creates a new function that has the this value set to obj1 when called.However, obj1 does not have a printSecondData method, so when getSecondData() is called, it will return undefined.It's important to note that the bind method creates a new function and does not modify the original function. In this case, obj2.printSecondData remains unchanged and still refers to obj2.data
 
 // --------------
 
@@ -268,7 +275,8 @@ const call = {
   },
 };
 
-call.says(); // output ???
+call.says(); // output ??? Hey, mom just called.
+
 
 // -----------------
 
@@ -281,7 +289,7 @@ const call = {
 
 let newCall = call.says;
 
-newCall(); // output ???
+newCall(); // output ??? Hey, undefined just called.
 
 //  -----------------
 
@@ -299,4 +307,4 @@ const call = {
 
 let newCall = call.anotherCaller;
 
-newCall(); // output ??
+newCall(); // output ?? undefined called, too!
