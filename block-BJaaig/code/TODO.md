@@ -40,14 +40,14 @@ console.log(userSayHello()); // output / Hello undefined
 console.log(typeof userSayHello.bind(user2)); // output /function
 console.log(userSayHello.bind(user2)()); // output /Hello Arya undefined
 console.log(user3.sayHello()); // output /user3.sayHello is not a function
-console.log(userSayHello.apply(user3)); // output / error
-console.log(userSayHello.call(user3)); // output / error
-console.log(typeof new MainUser()); // output / error
-console.log(typeof new MainUser()); // output / error
-console.log(new MainUser().sayHello()); // output / error
-console.log(new MainUser().sayHello.call(user2)); // output / error
-console.log(new MainUser().sayHello.call(user)); // output / error
+console.log(userSayHello.apply(user3)); // output / error hello bran
+console.log(userSayHello.call(user3)); // output / error hello bran
+console.log(typeof new MainUser()); // output / error object
+console.log(typeof new MainUser()); // output / error object
+console.log(new MainUser().sayHello()); // output / error  hello tyrian
+console.log(new MainUser().sayHello.call(user2)); // output / error hello arya
+console.log(new MainUser().sayHello.call(user)); // output / error  hello jhon
 console.log(
   new MainUser().sayHello.apply(user, ['Welcome!'])
-); // output / error
+); // output / error welcome jhon
 ```
