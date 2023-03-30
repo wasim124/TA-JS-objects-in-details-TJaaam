@@ -3,8 +3,8 @@ class Book{
         this.title=title;
         this.category=category;
         this.author=author;
-        this.isRead =isRead;
-        this.finishedDate=finishedDate;
+        this.isRead =false;
+        this.finishedDate=null;
     }
     markBookAsRead(){
         this.isRead=true;
