@@ -4,7 +4,13 @@
 */
 
 // myMap function goes here
-
+Array.prototype.myMap =function (callback){
+  let result =[];
+  for (let i=0;i< this.length;i++){
+    result.push(callback(this[i],i,this));
+  }
+  return result;
+}
 // Test the myMap function you created above
 
 let numbers = [1, 5, 6, 8, 9];
