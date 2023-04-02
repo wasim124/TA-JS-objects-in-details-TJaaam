@@ -64,6 +64,11 @@ textarea {
 html {
 	font-size: 16px;
   }
+.flex{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
   body {
 	line-height: 1.5;
 	font-family: "Open Sans", sans-serif;
@@ -75,18 +80,57 @@ html {
 	margin: 0 auto;
 	padding: 0 2rem;
   }
-  .header{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size:2rem ;
-  }
   h1{
-	margin-left: 8px;
+	font-size: 2rem;
+	text-align: center;
   }
   span{
-	color:lightskyblue
+	color:rgb(42, 136, 195);
   }
   i{
-	color:lightblue ;
+	color:rgb(42, 136, 195) ;
+	margin-right: 0.5rem;
+  }
+  
+  .form-group input{
+	width: 100%;
+	height: 2rem;
+	border: 0.1rem solid darkgrey;
+	margin-bottom: 0.5rem;
+  }
+  .btn{
+	width: 100%;
+	height: 2rem;
+	background-color:rgb(42, 136, 195);
+	color: aliceblue;
+  }
+ 
+.table{
+	margin-top: 1rem;
+	width: 100%;
+	text-align:center;
+	font-size: 1rem;
+}
+
+.table tr{
+	border-top: 0.003rem solid darkgray;
+}
+.table tbody{
+	background-color: rgb(230, 226, 226);
+}
+
+
+
+  .btn-1{
+font-size: 1rem;
+background-color: red;
+color: aliceblue;
+border: 1px solid red;
+border-left: 0.5rem solid red;
+border-right: 0.5rem solid red;
+text-decoration: none;
+
+  }
+  .flex-20{
+	flex-basis: 0 1 20%;
   }
