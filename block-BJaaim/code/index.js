@@ -5,10 +5,10 @@ class question{
         this.correctAnswer=correctAnswer;
     }
     isCorrect(answer){
-        return answer ===this.correctAnswer;
+        return answer === this.options[this.correctAnswer];
     }
     getCorrectAnswer(){
-        return this.correctAnswer;
+        return this.options[this.correctAnswer];
     }
     createUI(){
 
